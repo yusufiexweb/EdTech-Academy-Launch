@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141516">
+  <meta name="description" content="NOVA333X Academy is a hands-on learning studio for applied AI, software engineering, and the next generation of technology builders.">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <title>NOVA333X Academy — Learn by Building</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #141516;
+      --panel: #1c1e20;
+      --raised: #232527;
+      --ink: #f0eee8;
+      --muted: #9c9b95;
+      --line: #383a39;
+      --acid: #d3ff61;
+      --acid-ink: #1a2110;
+      --blue: #a0baff;
+      --orange: #ffa975;
+      --shadow-out: 9px 9px 20px #0e0f10, -8px -8px 18px #202224;
+      --shadow-in: inset 4px 4px 9px #111213, inset -4px -4px 9px #242628;
+      --display: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+      --body: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #ecece7;
+      --panel: #f4f4ef;
+      --raised: #e8e8e2;
+      --ink: #20231d;
+      --muted: #70736b;
+      --line: #d4d5cc;
+      --acid: #416d12;
+      --acid-ink: #f7faef;
+      --blue: #405fbb;
+      --orange: #a95522;
+      --shadow-out: 8px 8px 18px #d2d2cc, -8px -8px 18px #fffefa;
+      --shadow-in: inset 4px 4px 8px #d7d7d1, inset -4px -4px 8px #fffefa;
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 320px; background: var(--bg); scroll-behavior: smooth; }
+    body { min-width: 320px; margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.65 var(--body); -webkit-font-smoothing: antialiased; transition: background .25s, color .25s; }
+    button, input, select, textarea { font: inherit; }
+    button { color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; }
+    a { color: inherit; text-decoration: none; }
+    [hidden] { display: none !important; }
+    ::selection { background: var(--acid); color: var(--acid-ink); }
+    .page { width: min(100% - 64px, 1440px); margin: auto; }
+    .topbar { position: relative; z-index: 4; min-height: 82px; display: flex; align-items: center; gap: 24px; border-bottom: 1px solid var(--line); }
+    .brand { display: inline-flex; align-items: center; gap: 11px; flex: 0 0 auto; }
+    .brand-mark { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: var(--shadow-out); color: var(--acid); }
+    .brand-mark svg { width: 25px; height: 25px; }
+    .brand-name { font: 760 13px/1 var(--display); letter-spacing: .14em; }
+    .brand-name small { display: block; margin-top: 6px; color: var(--muted); font: 700 7px/1 var(--body); letter-spacing: .2em; }
+    .nav { display: flex; align-items: center; gap: clamp(14px, 2.5vw, 34px); margin-left: auto; }
+    .nav button { padding: 8px 0; border: 0; background: transparent; color: var(--muted); font-size: 9px; font-weight: 720; letter-spacing: .11em; text-transform: uppercase; }
+    .nav button:hover { color: var(--acid); }
+    .tools { display: flex; align-items: center; gap: 9px; }
+    .tool-btn, .menu-btn { width: 37px; height: 37px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 11px; background: var(--panel); box-shadow: var(--shadow-out); transition: color .2s, transform .2s; }
+    .tool-btn:hover, .menu-btn:hover { color: var(--acid); transform: translateY(-1px); }
+    .tool-btn svg { width: 16px; height: 16px; }
+    .menu-btn { width: 41px; height: 41px; align-content: center; gap: 5px; }
+    .menu-btn span { width: 15px; height: 1.5px; display: block; background: currentColor; transition: transform .24s var(--ease); }
+    .menu-btn[aria-expanded="true"] span:first-child { transform: translateY(3.2px) rotate(45deg); }
+    .menu-btn[aria-expanded="true"] span:last-child { transform: translateY(-3.2px) rotate(-45deg); }
+    .hero { position: relative; min-height: 610px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(350px, .82fr); align-items: center; gap: 5%; padding: 78px 2% 74px; }
+    .hero::after { position: absolute; z-index: -1; top: 72px; right: 4%; width: 400px; height: 400px; border: 1px solid color-mix(in srgb, var(--acid) 17%, transparent); border-radius: 50%; box-shadow: 0 0 0 34px color-mix(in srgb, var(--acid) 4%, transparent), 0 0 0 78px color-mix(in srgb, var(--acid) 3%, transparent); content: ""; }
+    .eyebrow, .kicker { color: var(--acid); font-size: 8px; font-weight: 800; letter-spacing: .19em; text-transform: uppercase; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+    .eyebrow::before { width: 22px; height: 2px; content: ""; background: currentColor; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 720px; margin-bottom: 20px; font: 760 clamp(58px, 8.6vw, 116px)/.91 var(--display); letter-spacing: -.085em; }
+    h1 span { color: var(--acid); }
+    .hero-copy > p:not(.eyebrow) { max-width: 490px; margin-bottom: 28px; color: var(--muted); font-size: 12px; line-height: 1.85; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { min-height: 43px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 0 15px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); box-shadow: var(--shadow-out); font-size: 8px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; transition: transform .2s, box-shadow .2s, color .2s, background .2s; }
+    .btn:hover { transform: translateY(-2px); color: var(--acid); }
+    .btn-primary { border-color: var(--acid); background: var(--acid); color: var(--acid-ink); box-shadow: 0 5px 22px color-mix(in srgb, var(--acid) 15%, transparent); }
+    .btn-primary:hover { background: color-mix(in srgb, var(--acid) 86%, white); color: var(--acid-ink); }
+    .btn svg { width: 14px; height: 14px; }
+    .hero-note { display: flex; align-items: center; gap: 9px; margin-top: 43px; color: var(--muted); font-size: 8px; font-weight: 730; letter-spacing: .12em; text-transform: uppercase; }
+    .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 0 5px color-mix(in srgb, var(--acid) 13%, transparent); animation: pulse 2s infinite; }
+    .hero-art { position: relative; min-height: 420px; display: grid; place-items: center; }
+    .orbital { position: absolute; width: min(100%, 400px); aspect-ratio: 1; border: 1px solid var(--line); border-radius: 50%; box-shadow: var(--shadow-in); animation: orbit 38s linear infinite; }
+    .orbital::before, .orbital::after { position: absolute; width: 9px; height: 9px; border: 2px solid var(--bg); border-radius: 50%; background: var(--acid); box-shadow: 0 0 16px color-mix(in srgb, var(--acid) 40%, transparent); content: ""; }
+    .orbital::before { top: 15%; left: 18%; }
+    .orbital::after { right: 9%; bottom: 29%; width: 6px; height: 6px; background: var(--blue); }
+    .orbital-inner { position: absolute; inset: 12%; border: 1px dashed color-mix(in srgb, var(--acid) 29%, var(--line)); border-radius: 50%; animation: orbit 28s linear infinite reverse; }
+    .hero-core { position: relative; z-index: 1; width: 205px; height: 205px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 35% 65% 58% 42% / 47% 42% 58% 53%; background: var(--panel); box-shadow: var(--shadow-out), 0 0 45px color-mix(in srgb, var(--acid) 8%, transparent); animation: morph 10s ease-in-out infinite; }
+    .hero-core svg { width: 100px; height: 100px; color: var(--acid); }
+    .float-tag { position: absolute; z-index: 2; padding: 11px 13px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); box-shadow: var(--shadow-out); font-size: 7px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .float-tag strong { display: block; margin-top: 3px; color: var(--acid); font: 680 16px/1 var(--display); letter-spacing: -.04em; }
+    .float-tag.tag-a { top: 12%; right: 0; }
+    .float-tag.tag-b { bottom: 9%; left: 0; }
+    .hero-index { position: absolute; right: 1%; bottom: 0; color: var(--muted); font-size: 7px; font-weight: 750; letter-spacing: .16em; }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; padding: 19px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .metrics-note { grid-column: 1 / -1; margin: -2px 3px 0; color: var(--muted); font-size: 7px; }
+    .metric { min-height: 74px; display: flex; flex-direction: column; justify-content: center; padding: 10px 19px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); box-shadow: var(--shadow-out); }
+    .metric strong { font: 680 29px/1 var(--display); letter-spacing: -.07em; }
+    .metric strong small { color: var(--acid); font-size: 13px; letter-spacing: 0; }
+    .metric span { margin-top: 7px; color: var(--muted); font-size: 7px; font-weight: 760; letter-spacing: .12em; text-transform: uppercase; }
+    .section { padding: 99px 0; }
+    .section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 25px; margin-bottom: 31px; }
+    .section-head h2, .skill-copy h2, .closing h2 { margin: 9px 0 0; font: 690 clamp(35px, 5vw, 62px)/1.02 var(--display); letter-spacing: -.075em; }
+    .section-head > p { max-width: 340px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.8; }
+    .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .module { position: relative; min-height: 263px; display: flex; flex-direction: column; padding: 19px; border: 1px solid var(--line); border-radius: 13px; background: var(--panel); box-shadow: var(--shadow-out); transition: transform .2s, border-color .2s; }
+    .module:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--acid) 60%, var(--line)); }
+    .module-no { align-self: flex-start; padding: 5px 8px; border: 1px solid var(--line); border-radius: 6px; color: var(--acid); font-size: 7px; font-weight: 800; letter-spacing: .12em; }
+    .module h3 { margin: 26px 0 8px; font: 650 22px/1.1 var(--display); letter-spacing: -.055em; }
+    .module p { margin-bottom: 15px; color: var(--muted); font-size: 9px; line-height: 1.75; }
+    .module-meta { display: flex; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 7px; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+    .module-meta b { color: var(--ink); }
+    .module-btn { align-self: flex-start; margin-top: 13px; padding: 0; border: 0; border-bottom: 1px solid var(--acid); background: none; color: var(--acid); font-size: 7px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .skill-section { display: grid; grid-template-columns: .8fr 1.2fr; gap: 7%; align-items: center; padding: 48px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); box-shadow: var(--shadow-out); }
+    .skill-copy h2 { margin-bottom: 14px; }
+    .skill-copy > p:not(.kicker) { max-width: 380px; color: var(--muted); font-size: 10px; line-height: 1.8; }
+    .skill-output { min-height: 78px; margin-top: 22px; padding: 13px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); box-shadow: var(--shadow-in); color: var(--muted); font-size: 8px; line-height: 1.65; }
+    .skill-output strong { display: block; margin-bottom: 4px; color: var(--acid); font-size: 9px; }
+    .tree { position: relative; min-height: 325px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 1fr 1fr 1fr; align-items: center; justify-items: center; padding: 12px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background-color: var(--bg); background-image: radial-gradient(color-mix(in srgb, var(--muted) 24%, transparent) .8px, transparent .8px); background-size: 18px 18px; box-shadow: var(--shadow-in); }
+    .tree-lines { position: absolute; inset: 12%; width: 76%; height: 76%; overflow: visible; pointer-events: none; }
+    .tree-lines path { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 4 5; }
+    .tree-lines path.is-lit { stroke: var(--acid); }
+    .skill-node { position: relative; z-index: 1; min-width: 80px; min-height: 45px; padding: 8px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); box-shadow: var(--shadow-out); color: var(--muted); font-size: 7px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; transition: color .2s, border-color .2s, background .2s; }
+    .skill-node:hover, .skill-node.active { border-color: var(--acid); color: var(--acid); }
+    .skill-node[data-node="core"] { grid-column: 2; grid-row: 1; }
+    .skill-node[data-node="ml"] { grid-column: 1; grid-row: 2; }
+    .skill-node[data-node="web"] { grid-column: 2; grid-row: 2; }
+    .skill-node[data-node="data"] { grid-column: 3; grid-row: 2; }
+    .skill-node[data-node="ship"] { grid-column: 2; grid-row: 3; }
+    .skill-node[data-node="ml"]:not(.active), .skill-node[data-node="data"]:not(.active) { opacity: .58; }
+    .faculty { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .faculty-card { min-height: 280px; display: flex; flex-direction: column; padding: 21px; border: 1px solid var(--line); border-radius: 13px; background: var(--panel); box-shadow: var(--shadow-out); }
+    .faculty-avatar { position: relative; height: 102px; display: flex; align-items: flex-end; justify-content: flex-end; overflow: hidden; padding: 11px; border: 1px solid var(--line); border-radius: 9px; background: var(--raised); }
+    .faculty-avatar::before, .faculty-avatar::after { position: absolute; border: 1px solid color-mix(in srgb, var(--acid) 42%, transparent); border-radius: 50%; content: ""; }
+    .faculty-avatar::before { top: -41px; left: 15%; width: 155px; height: 155px; box-shadow: 0 0 0 18px color-mix(in srgb, var(--acid) 5%, transparent), 0 0 0 40px color-mix(in srgb, var(--acid) 4%, transparent); }
+    .faculty-avatar::after { top: 12px; left: 35%; width: 70px; height: 70px; border-style: dashed; }
+    .faculty-avatar span { position: relative; z-index: 1; color: var(--acid); font: 720 10px var(--display); letter-spacing: .14em; }
+    .faculty-card h3 { margin: 18px 0 4px; font: 650 19px/1.15 var(--display); letter-spacing: -.04em; }
+    .faculty-role { color: var(--acid); font-size: 7px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .faculty-card p { margin: 11px 0; color: var(--muted); font-size: 9px; line-height: 1.7; }
+    .faculty-card button { align-self: flex-start; margin-top: auto; padding: 0 0 3px; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--ink); font-size: 7px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .faculty-card button:hover { border-color: var(--acid); color: var(--acid); }
+    .showcase-strip { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 25px; padding: 27px 30px; border: 1px solid var(--line); border-radius: 13px; background: var(--raised); box-shadow: var(--shadow-in); }
+    .showcase-strip h3 { margin: 0 0 5px; font: 640 23px/1.1 var(--display); letter-spacing: -.05em; }
+    .showcase-strip p { max-width: 500px; margin: 0; color: var(--muted); font-size: 9px; }
+    .closing { position: relative; overflow: hidden; margin: 15px 0 45px; padding: 55px; border: 1px solid var(--line); border-radius: 16px; background: var(--panel); box-shadow: var(--shadow-out); }
+    .closing::after { position: absolute; top: -100px; right: -40px; width: 300px; height: 300px; border: 1px solid color-mix(in srgb, var(--acid) 27%, transparent); border-radius: 50%; box-shadow: 0 0 0 26px color-mix(in srgb, var(--acid) 5%, transparent), 0 0 0 62px color-mix(in srgb, var(--acid) 4%, transparent); content: ""; }
+    .closing-content { position: relative; z-index: 1; max-width: 700px; }
+    .closing h2 { margin-bottom: 13px; }
+    .closing p:not(.kicker) { max-width: 430px; margin-bottom: 22px; color: var(--muted); font-size: 10px; }
+    .footer { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 7px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .footer-brand { color: var(--ink); font-weight: 850; letter-spacing: .15em; }
+    .socials { display: flex; gap: 8px; }
+    .socials a { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); box-shadow: var(--shadow-out); color: var(--muted); transition: transform .2s, color .2s, border-color .2s; }
+    .socials a:hover { transform: translateY(-2px); border-color: var(--acid); color: var(--acid); }
+    .socials svg { width: 15px; height: 15px; fill: currentColor; }
+    .search-row { min-height: 62px; display: flex; align-items: center; justify-content: flex-end; border-bottom: 1px solid var(--line); }
+    .search-box { position: relative; width: min(100%, 275px); }
+    .search-box svg { position: absolute; top: 10px; left: 10px; width: 14px; height: 14px; color: var(--muted); }
+    .search-box input { width: 100%; height: 35px; padding: 0 10px 0 33px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); box-shadow: var(--shadow-in); color: var(--ink); font-size: 9px; }
+    .search-box input::placeholder { color: var(--muted); }
+    .search-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+    .overlay { position: fixed; z-index: 20; inset: 0; visibility: hidden; background: #070808b8; opacity: 0; transition: opacity .3s, visibility .3s; }
+    .overlay.open { visibility: visible; opacity: 1; }
+    .drawer { position: fixed; z-index: 21; inset: 0 0 0 auto; width: min(475px, 100%); display: flex; flex-direction: column; padding: 27px clamp(22px, 5vw, 43px); border-left: 1px solid var(--line); background: var(--bg); box-shadow: -20px 0 70px #0006; transform: translateX(103%); transition: transform .38s var(--ease); }
+    .drawer.open { transform: translateX(0); }
+    .drawer-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 17px; border-bottom: 1px solid var(--line); }
+    .drawer-brand { color: var(--acid); font-size: 7px; font-weight: 820; letter-spacing: .17em; text-transform: uppercase; }
+    .drawer-close { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+    .drawer-close:hover { color: var(--acid); }
+    .drawer-close svg { width: 15px; height: 15px; }
+    .drawer-content { flex: 1; overflow-y: auto; padding: 28px 3px 23px 0; }
+    .drawer-content h2 { margin: 8px 0 12px; font: 690 clamp(36px, 8vw, 53px)/1 var(--display); letter-spacing: -.075em; }
+    .drawer-content > p:not(.kicker):not(.form-message) { color: var(--muted); font-size: 10px; line-height: 1.8; }
+    .drawer-content .kicker { margin-bottom: 7px; }
+    .drawer-list { display: grid; margin: 20px 0; padding: 0; list-style: none; }
+    .drawer-list li { padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 9px; line-height: 1.7; }
+    .drawer-list strong { display: block; margin-bottom: 3px; color: var(--ink); font-size: 9px; }
+    .drawer-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 19px 0; }
+    .drawer-stats div { padding: 13px; border: 1px solid var(--line); border-radius: 9px; background: var(--panel); box-shadow: var(--shadow-out); }
+    .drawer-stats strong { display: block; font: 650 21px var(--display); letter-spacing: -.04em; }
+    .drawer-stats span { display: block; margin-top: 4px; color: var(--muted); font-size: 7px; font-weight: 730; letter-spacing: .08em; text-transform: uppercase; }
+    .drawer-foot { padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 7px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .drawer-form { display: grid; gap: 12px; margin-top: 17px; }
+    .field { display: grid; gap: 5px; }
+    .field label { color: var(--muted); font-size: 7px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .field input, .field select, .field textarea { width: 100%; min-height: 39px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); box-shadow: var(--shadow-in); color: var(--ink); font-size: 9px; }
+    .field textarea { min-height: 73px; resize: vertical; }
+    .field input[type="checkbox"] { width: 14px; min-height: 14px; padding: 0; accent-color: var(--acid); }
+    .check-row { display: flex; align-items: flex-start; gap: 8px; color: var(--muted); font-size: 8px; line-height: 1.6; }
+    .check-row input { flex: 0 0 auto; margin: 2px 0 0; accent-color: var(--acid); }
+    .form-message { min-height: 16px; margin: 0; color: var(--acid); font-size: 8px; line-height: 1.6; }
+    .form-note { padding: 10px; border-left: 2px solid var(--orange); background: var(--panel); color: var(--muted); font-size: 8px !important; }
+    .menu-links { display: grid; margin-top: 12px; }
+    .menu-links button { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border: 0; border-bottom: 1px solid var(--line); background: none; font: 600 18px var(--display); text-align: left; }
+    .menu-links button span { color: var(--acid); font: 750 11px var(--body); }
+    .preloader { position: fixed; z-index: 50; inset: 0; display: grid; place-items: center; background: var(--bg); color: var(--acid); transition: opacity .55s, visibility .55s; }
+    .preloader.done { visibility: hidden; opacity: 0; }
+    .loader-lockup { display: grid; justify-items: center; gap: 13px; }
+    .loader-mark { width: 60px; height: 60px; animation: orbit 6s linear infinite; }
+    .loader-word { color: var(--ink); font: 800 9px var(--display); letter-spacing: .23em; }
+    .loader-word small { display: block; margin-top: 6px; color: var(--muted); font: 750 6px var(--body); letter-spacing: .18em; text-align: center; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 8px transparent; } }
+    @keyframes orbit { to { transform: rotate(360deg); } }
+    @keyframes morph { 50% { border-radius: 58% 42% 40% 60% / 42% 56% 44% 58%; transform: translateY(-5px); } }
+    @media (max-width: 900px) {
+      .page { width: min(100% - 44px, 1440px); }
+      .nav { gap: 13px; }
+      .nav button { font-size: 7px; }
+      .hero { min-height: 550px; grid-template-columns: 1fr .8fr; gap: 2%; }
+      .hero-core { width: 165px; height: 165px; }
+      .hero-core svg { width: 80px; height: 80px; }
+      .roadmap { grid-template-columns: 1fr 1fr; }
+      .skill-section { grid-template-columns: .9fr 1.1fr; gap: 4%; padding: 29px; }
+    }
+    @media (max-width: 650px) {
+      .page { width: calc(100% - 36px); }
+      .topbar { min-height: 70px; gap: 10px; }
+      .brand-mark { width: 36px; height: 36px; }
+      .brand-name { font-size: 11px; }
+      .nav { display: none; }
+      .tools { margin-left: auto; }
+      .tool-btn { width: 34px; height: 34px; }
+      .menu-btn { width: 37px; height: 37px; }
+      .hero { min-height: auto; grid-template-columns: 1fr; gap: 14px; padding: 55px 0 41px; }
+      h1 { font-size: clamp(58px, 16vw, 88px); }
+      .hero-copy > p:not(.eyebrow) { font-size: 11px; }
+      .hero-note { margin-top: 27px; }
+      .hero-art { min-height: min(92vw, 370px); }
+      .orbital { width: min(80vw, 330px); }
+      .hero-core { width: 145px; height: 145px; }
+      .hero-core svg { width: 69px; height: 69px; }
+      .float-tag.tag-a { right: 2%; }
+      .float-tag.tag-b { left: 2%; }
+      .hero-index { right: 1%; bottom: -7px; }
+      .metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .metric { padding: 10px 12px; }
+      .metric strong { font-size: 25px; }
+      .search-row { min-height: 55px; }
+      .section { padding: 70px 0; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .section-head > p { max-width: 430px; }
+      .roadmap { gap: 9px; }
+      .module { min-height: 252px; padding: 14px; }
+      .module h3 { font-size: 18px; }
+      .skill-section { grid-template-columns: 1fr; gap: 23px; padding: 22px; }
+      .tree { min-height: 275px; }
+      .faculty { grid-template-columns: 1fr; }
+      .faculty-card { min-height: 235px; }
+      .faculty-avatar { height: 85px; }
+      .showcase-strip { grid-template-columns: 1fr; padding: 21px; }
+      .closing { margin-bottom: 27px; padding: 32px 22px; }
+      .footer { min-height: 100px; flex-wrap: wrap; gap: 9px; padding: 16px 0; }
+      .socials { order: 3; width: 100%; }
+      .footer > span:last-child { margin-left: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="preloader" id="preloader" aria-label="Loading NOVA333X Academy">
+    <div class="loader-lockup">
+      <svg class="loader-mark" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+        <path d="M32 5 54 17.5v29L32 59 10 46.5v-29L32 5Z" stroke="currentColor"/>
+        <path d="M20 43V24l24 19V21M15 17h34M15 47h34" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="32" cy="32" r="4" fill="currentColor"/>
+        <circle cx="32" cy="32" r="14" stroke="currentColor" stroke-dasharray="2 4"/>
+      </svg>
+      <div class="loader-word">NOVA333X<small>ACADEMY / LEARN BY BUILDING</small></div>
+    </div>
+  </div>
+  <main class="page">
+    <header class="topbar">
+      <a class="brand" href="All%20Projects.html" aria-label="NOVA333X Academy home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M20 3.5 34.5 12v16L20 36.5 5.5 28V12L20 3.5Z" stroke="currentColor"/><path d="M12 25V15l16 11V14" stroke="currentColor" stroke-width="1.7" stroke-linecap="square"/><circle cx="20" cy="20" r="2" fill="currentColor"/></svg></span>
+        <span class="brand-name">NOVA333X<small>AI &amp; TECH ACADEMY</small></span>
+      </a>
+      <nav class="nav" aria-label="Main navigation">
+        <button type="button" data-panel="curriculum">Curriculum</button>
+        <button type="button" data-panel="skills">Skill tree</button>
+        <button type="button" data-panel="showcase">Student work</button>
+        <button type="button" data-panel="certification">Verify certificate</button>
+      </nav>
+      <div class="tools">
+        <button class="tool-btn" id="themeToggle" type="button" aria-label="Switch to light theme" title="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg></button>
+        <button class="menu-btn" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
+      </div>
+    </header>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <p class="eyebrow">Learning, without the lecture hall</p>
+        <h1 id="heroTitle">Build the<br><span>next thing.</span></h1>
+        <p>A hands-on academy for people who want to understand intelligent systems by making them. Learn AI, software, and product craft in one connected studio.</p>
+        <div class="actions">
+          <button class="btn btn-primary" type="button" data-panel="enroll">Apply to the academy <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 10h13m-5-5 5 5-5 5"/></svg></button>
+          <button class="btn" type="button" data-panel="curriculum">Explore the syllabus</button>
+        </div>
+        <div class="hero-note"><span class="live-dot"></span>Project-led / Mentor-guided / Cohort-built</div>
+      </div>
+      <div class="hero-art" aria-label="Animated abstract academy knowledge emblem">
+        <div class="orbital"><span class="orbital-inner"></span></div>
+        <div class="hero-core"><svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M50 10 82 28v37L50 84 18 65V28L50 10Z" stroke="currentColor" stroke-width="1.4"/><path d="M32 59V39l36 23V37" stroke="currentColor" stroke-width="3" stroke-linecap="square"/><circle cx="50" cy="50" r="5" fill="currentColor"/><path d="M50 3v9m0 76v9M7 50h10m66 0h10" stroke="currentColor" stroke-width="1.3"/></svg></div>
+        <div class="float-tag tag-a">Cohort 07<strong>NOW FORMING</strong></div>
+        <div class="float-tag tag-b">Build / Learn / Ship<strong>01 → 04</strong></div>
+        <span class="hero-index">ACADEMY SYSTEM / v.01</span>
+      </div>
+    </section>
+    <section class="metrics" aria-label="Illustrative academy outcomes">
+      <div class="metric"><strong><span data-count="94">0</span><small>%</small></strong><span>Project completion*</span></div>
+      <div class="metric"><strong><span data-count="18">0</span><small> wks</small></strong><span>Studio program</span></div>
+      <div class="metric"><strong><span data-count="12">0</span><small>:1</small></strong><span>Mentor ratio · target</span></div>
+      <div class="metric"><strong><span data-count="6">0</span><small> builds</small></strong><span>Portfolio-ready work</span></div>
+      <p class="metrics-note">*Illustrative academy launch targets, not verified historical student outcomes.</p>
+    </section>
+    <div class="search-row">
+      <label class="search-box"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="academySearch" type="search" maxlength="64" autocomplete="off" placeholder="Search courses and topics" aria-label="Search courses and academy topics"><span class="search-status" id="searchStatus" aria-live="polite"></span></label>
+    </div>
+    <section class="section" id="roadmap" aria-labelledby="roadmapTitle">
+      <div class="section-head"><div><p class="kicker">The learning roadmap / 01</p><h2 id="roadmapTitle">From blank page<br>to shipped work.</h2></div><p>Four connected modules. One growing body of work. Every week turns a new idea into something you can show.</p></div>
+      <div class="roadmap">
+        <article class="module" data-searchable="foundation python git terminal systems problem solving">
+          <span class="module-no">MODULE / 01</span><h3>Systems thinking</h3><p>Build your technical foundation: Python, the command line, version control, and how software systems fit together.</p><div class="module-meta"><b>Foundation</b><span>Weeks 01—03</span></div><button class="module-btn" type="button" data-panel="curriculum">Open syllabus →</button>
+        </article>
+        <article class="module" data-searchable="machine learning artificial intelligence models data training evaluation">
+          <span class="module-no">MODULE / 02</span><h3>Applied intelligence</h3><p>Explore machine learning, model evaluation, and practical AI patterns through experiments you can inspect.</p><div class="module-meta"><b>AI / ML</b><span>Weeks 04—08</span></div><button class="module-btn" type="button" data-panel="curriculum">Open syllabus →</button>
+        </article>
+        <article class="module" data-searchable="product engineering frontend backend api full stack interfaces">
+          <span class="module-no">MODULE / 03</span><h3>Product engineering</h3><p>Turn capability into a useful product. Design interfaces, build APIs, test assumptions, and iterate.</p><div class="module-meta"><b>Build</b><span>Weeks 09—13</span></div><button class="module-btn" type="button" data-panel="curriculum">Open syllabus →</button>
+        </article>
+        <article class="module" data-searchable="capstone portfolio deployment launch demo presentation career">
+          <span class="module-no">MODULE / 04</span><h3>Capstone studio</h3><p>Ship a substantial project, document the decisions, and present your work to a community of builders.</p><div class="module-meta"><b>Launch</b><span>Weeks 14—18</span></div><button class="module-btn" type="button" data-panel="showcase">See student work →</button>
+        </article>
+      </div>
+    </section>
+    <section class="skill-section" aria-labelledby="skillTitle">
+      <div class="skill-copy"><p class="kicker">Interactive skill tree / 02</p><h2 id="skillTitle">Pick a path.<br>Find your next node.</h2><p>Explore how foundational skills connect to applied AI, product development, and the final shipped project. Select a node to reveal its next step.</p><div class="skill-output" id="skillOutput" aria-live="polite"><strong>Start at the core</strong>Choose a node in the learning graph to explore its prerequisites and next steps.</div></div>
+      <div class="tree" role="group" aria-label="Interactive technology learning skill tree">
+        <svg class="tree-lines" viewBox="0 0 300 230" preserveAspectRatio="none" aria-hidden="true"><path data-edge="core-web" d="M150 40v50"/><path data-edge="web-ml" d="M140 105 65 130"/><path data-edge="web-data" d="m160 105 75 25"/><path data-edge="ml-ship" d="m65 150 85 48"/><path data-edge="data-ship" d="m235 150-85 48"/></svg>
+        <button class="skill-node" type="button" data-node="core">Core / Python</button>
+        <button class="skill-node" type="button" data-node="ml">AI / Models</button>
+        <button class="skill-node" type="button" data-node="web">Web / Product</button>
+        <button class="skill-node" type="button" data-node="data">Data / Insight</button>
+        <button class="skill-node" type="button" data-node="ship">Capstone / Ship</button>
+      </div>
+    </section>
+    <section class="section" aria-labelledby="facultyTitle">
+      <div class="section-head"><div><p class="kicker">Faculty spotlight / 03</p><h2 id="facultyTitle">Practitioners first.</h2></div><p>Learn alongside people who build, explain, question, and care about how technology works in the world.</p></div>
+      <div class="faculty">
+        <article class="faculty-card"><div class="faculty-avatar" aria-hidden="true"><span>01 / AI</span></div><h3>Dr. Mira Solis</h3><span class="faculty-role">Applied AI / Research</span><p>Turns model behavior into hands-on experiments, clear mental models, and better questions.</p><button type="button" data-panel="faculty-ai">View faculty reel →</button></article>
+        <article class="faculty-card"><div class="faculty-avatar" aria-hidden="true"><span>02 / ENG</span></div><h3>Jonah Park</h3><span class="faculty-role">Software / Product</span><p>Helps students move from first prototype to resilient, thoughtful software products.</p><button type="button" data-panel="faculty-eng">View faculty reel →</button></article>
+        <article class="faculty-card"><div class="faculty-avatar" aria-hidden="true"><span>03 / DATA</span></div><h3>Amara Nwosu</h3><span class="faculty-role">Data / Responsible systems</span><p>Connects data craft, critical thinking, and the human choices behind technical systems.</p><button type="button" data-panel="faculty-data">View faculty reel →</button></article>
+      </div>
+    </section>
+    <section class="showcase-strip">
+      <div><p class="kicker">The work speaks / student showcase</p><h3>See what a cohort can make.</h3><p>Explore capstone concepts, build notes, and project walkthroughs. Student work shown here is illustrative.</p></div>
+      <button class="btn" type="button" data-panel="showcase">Open project gallery <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 10h13m-5-5 5 5-5 5"/></svg></button>
+    </section>
+    <section class="section" aria-labelledby="trustTitle">
+      <div class="section-head"><div><p class="kicker">Proof, not promises / 04</p><h2 id="trustTitle">Make learning verifiable.</h2></div><p>Inspect a certificate reference in the verification panel. This interface is a demonstration and does not connect to an official credential registry.</p></div>
+      <button class="btn" type="button" data-panel="certification">Open certificate verification <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 10h13m-5-5 5 5-5 5"/></svg></button>
+    </section>
+    <section class="closing">
+      <div class="closing-content"><p class="kicker">The next cohort / NOVA333X</p><h2>Make room for what you can build.</h2><p>Explore enrollment, scholarship consideration, or flexible tuition options. No application data is sent from this prototype.</p><div class="actions"><button class="btn btn-primary" type="button" data-panel="enroll">Enrollment &amp; scholarships</button><button class="btn" type="button" data-panel="tuition">Tuition calculator</button></div></div>
+    </section>
+    <footer class="footer"><span class="footer-brand">NOVA333X / ACADEMY</span><nav class="socials" aria-label="Social profiles">
+      <a href="https://www.upwork.com" target="_blank" rel="noopener noreferrer" aria-label="Upwork profile" title="Upwork"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.3 7.1c-1.95 0-3.42 1.22-4.18 3.12-.78-1.16-1.38-2.45-1.75-3.9H8.55v5.02c0 1.08-.88 1.96-1.96 1.96s-1.96-.88-1.96-1.96V6.32H1.95v5.02a4.64 4.64 0 0 0 8.98 1.62c.6.82 1.28 1.58 2.06 2.22l-1.4 6.5h2.75l1.07-4.95c.59.19 1.2.29 1.83.29 2.74 0 4.82-2.03 4.82-4.83 0-2.92-2.04-5.09-4.76-5.09Zm-.02 7.5c-.56 0-1.1-.14-1.62-.42l.48-2.23c.33-1.53.85-2.34 1.68-2.34.95 0 1.58 1 1.58 2.5 0 1.5-.83 2.49-2.12 2.49Z"/></svg></a>
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 3.4a2.1 2.1 0 1 1 0 4.2 2.1 2.1 0 0 1 0-4.2ZM3.4 9h3.7v11.6H3.4V9Zm5.9 0h3.5v1.6h.05A3.85 3.85 0 0 1 16.3 8.7c3.8 0 4.5 2.5 4.5 5.7v6.2h-3.7v-5.5c0-1.3-.02-3-1.85-3-1.85 0-2.13 1.45-2.13 2.9v5.6H9.3V9Z"/></svg></a>
+      <a href="https://github.com/yusufiexweb" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .9a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .1.76.09 2.45 1.56.9.15 1.85-.1 2.45-.37.1-.72.4-1.2.72-1.48-2.48-.28-5.08-1.24-5.08-5.52 0-1.22.44-2.97.1-2.97 0 0 .95-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.13-1.45 3.08-1.15 3.08-1.15.6 1.54.22 2.69.1 2.97.72.78 1.16 1.78 1.16 3 0 4.3-2.6 5.23-5.1 5.5.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .9Z"/></svg></a>
+    </nav><span>© 2026 / LEARN BY BUILDING</span></footer>
+  </main>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+    <div class="drawer-top"><span class="drawer-brand">NOVA333X / Academy</span><button class="drawer-close" id="drawerClose" type="button" aria-label="Close panel"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15"/></svg></button></div>
+    <div class="drawer-content" id="drawerContent"></div><div class="drawer-foot">Project-led learning / made for the curious</div>
+  </aside>
+  <template id="panel-curriculum"><p class="kicker">Detailed course curriculum / 18 weeks</p><h2 id="drawerTitle">Learn it.<br>Build it.</h2><p>A practical route from core software foundations to an AI-powered capstone. Every phase ends with a reviewable project artifact.</p><ul class="drawer-list"><li><strong>01—03 / Systems foundations</strong>Python, Git, command line, data structures, debugging, and technical communication.</li><li><strong>04—08 / Applied intelligence</strong>Data preparation, model concepts, evaluation, responsible use, and small AI experiments.</li><li><strong>09—13 / Product engineering</strong>Interface design, APIs, persistence concepts, testing, accessibility, and iteration.</li><li><strong>14—18 / Capstone studio</strong>Scope, build, review, document, and present a complete portfolio project.</li></ul><button class="btn btn-primary" type="button" data-panel="enroll">Apply to the academy</button></template>
+  <template id="panel-skills"><p class="kicker">Skill tree / learning pathways</p><h2 id="drawerTitle">Progress is<br>connected.</h2><p>Start with core programming, then choose a focused path in applied intelligence, product engineering, or data. The capstone brings the branches back together.</p><div class="drawer-stats"><div><strong>Core</strong><span>Python · Git · Systems</span></div><div><strong>Branch</strong><span>AI · Product · Data</span></div></div><ul class="drawer-list"><li><strong>Foundation first</strong>Build the shared technical language needed for every specialization.</li><li><strong>Choose a direction</strong>Explore model experimentation, product development, or data-informed systems.</li><li><strong>Integrate and ship</strong>Use your chosen skills in an end-to-end capstone.</li></ul></template>
+  <template id="panel-showcase"><p class="kicker">Student portfolio / project gallery</p><h2 id="drawerTitle">The proof is<br>in the build.</h2><p>A sample portfolio showcase concept. Project examples below are illustrative and are not represented as real student outcomes.</p><ul class="drawer-list"><li><strong>Signal Garden / applied AI</strong>A small research assistant that makes source traces visible.</li><li><strong>Common Ground / civic tech</strong>A community resource map with thoughtful accessibility patterns.</li><li><strong>Loop Studio / creative tools</strong>A browser-based experiment connecting generative systems and visual design.</li></ul><div class="drawer-stats"><div><strong>6 builds</strong><span>Program goal</span></div><div><strong>1 capstone</strong><span>Show what you know</span></div></div></template>
+  <template id="panel-certification"><p class="kicker">Credential records / verification request</p><h2 id="drawerTitle">Check a<br>certificate.</h2><p>This demonstration does not connect to an official credential registry. Enter a sample reference to preview the request form; no credential status will be confirmed.</p><form class="drawer-form" data-demo-form="certification" novalidate><div class="field"><label for="certificateRef">Certificate reference</label><input id="certificateRef" name="reference" maxlength="48" autocomplete="off" required></div><div class="field"><label for="certificateEmail">Contact email</label><input id="certificateEmail" name="email" type="email" maxlength="254" autocomplete="email" required></div><button class="btn btn-primary" type="submit">Preview verification request</button><p class="form-message" data-form-message aria-live="polite"></p></form></template>
+  <template id="panel-enroll"><p class="kicker">Academy sign-up / enrollment &amp; scholarship</p><h2 id="drawerTitle">Start your<br>application.</h2><p>Share a few details to preview an enrollment or scholarship application. This interface does not submit or store personal information.</p><form class="drawer-form" data-demo-form="enroll" novalidate><div class="field"><label for="appName">Preferred name</label><input id="appName" name="name" maxlength="80" autocomplete="name" required></div><div class="field"><label for="appEmail">Email address</label><input id="appEmail" name="email" type="email" maxlength="254" autocomplete="email" required></div><div class="field"><label for="appTrack">Learning track</label><select id="appTrack" name="track" required><option value="">Select a track</option><option>Applied AI &amp; machine learning</option><option>Software &amp; product engineering</option><option>Data &amp; responsible systems</option></select></div><div class="field"><label for="appType">Application route</label><select id="appType" name="application" required><option value="">Choose one</option><option>Academy enrollment</option><option>Scholarship consideration</option></select></div><label class="check-row"><input type="checkbox" name="demoConsent" required><span>I understand this is a local form preview and no application will be submitted.</span></label><button class="btn btn-primary" type="submit">Preview application</button><p class="form-message" data-form-message aria-live="polite"></p></form></template>
+  <template id="panel-signin"><p class="kicker">Student portal / sign in</p><h2 id="drawerTitle">Good to<br>see you.</h2><p>Student portal access is a front-end demonstration. No credentials are transmitted or authenticated.</p><form class="drawer-form" data-demo-form="signin" novalidate><div class="field"><label for="studentEmail">Email address</label><input id="studentEmail" name="email" type="email" maxlength="254" autocomplete="email" required></div><div class="field"><label for="studentPassword">Password</label><input id="studentPassword" name="password" type="password" minlength="8" maxlength="128" autocomplete="current-password" required></div><button class="btn btn-primary" type="submit">Preview portal sign-in</button><p class="form-message" data-form-message aria-live="polite"></p><button class="module-btn" type="button" data-panel="signup">Create an academy account →</button></form></template>
+  <template id="panel-signup"><p class="kicker">Academy account / sign up</p><h2 id="drawerTitle">Your next<br>chapter.</h2><p>Create a sample student profile. This form is not connected to an account service and does not save your details.</p><form class="drawer-form" data-demo-form="signup" novalidate><div class="field"><label for="newStudentName">Preferred name</label><input id="newStudentName" name="name" maxlength="80" autocomplete="name" required></div><div class="field"><label for="newStudentEmail">Email address</label><input id="newStudentEmail" name="email" type="email" maxlength="254" autocomplete="email" required></div><div class="field"><label for="newStudentPassword">Create password · 8 characters minimum</label><input id="newStudentPassword" name="password" type="password" minlength="8" maxlength="128" autocomplete="new-password" required></div><label class="check-row"><input type="checkbox" name="demoConsent" required><span>I understand this is a non-persistent account preview.</span></label><button class="btn btn-primary" type="submit">Preview sign-up</button><p class="form-message" data-form-message aria-live="polite"></p></form></template>
+  <template id="panel-tuition"><p class="kicker">Tuition calculator / estimate</p><h2 id="drawerTitle">Plan your<br>learning path.</h2><p>Adjust the program and scholarship estimate to see a sample tuition calculation. Values are illustrative only, not a quote or offer.</p><form class="drawer-form" id="tuitionForm"><div class="field"><label for="tuitionWeeks">Program length · weeks</label><input id="tuitionWeeks" type="range" min="6" max="18" step="3" value="18"></div><div class="field"><label for="scholarshipPct">Scholarship estimate · <output id="scholarshipValue">0</output>%</label><input id="scholarshipPct" type="range" min="0" max="50" step="5" value="0"></div></form><div class="drawer-stats"><div><strong id="tuitionTotal">$4,800</strong><span>Illustrative total</span></div><div><strong id="tuitionWeekly">$267</strong><span>Approx. weekly amount</span></div></div><p class="form-note">Sample calculator only. Actual fees, scholarship eligibility, and payment terms are not provided here.</p><button class="btn btn-primary" type="button" data-panel="enroll">Ask about scholarship options</button></template>
+  <template id="panel-faculty-ai"><p class="kicker">Faculty reel / applied AI</p><h2 id="drawerTitle">Dr. Mira<br>Solis.</h2><p>Reel concept: unpacking a model prediction, checking its limits, and turning a research question into a practical experiment.</p><ul class="drawer-list"><li><strong>Spotlight / Model behavior</strong>How to ask what a system learned—not just what it outputs.</li><li><strong>Studio prompt</strong>Build a small, testable AI experiment and document failure modes.</li></ul></template>
+  <template id="panel-faculty-eng"><p class="kicker">Faculty reel / software engineering</p><h2 id="drawerTitle">Jonah<br>Park.</h2><p>Reel concept: take a rough product idea from sketch to a working, tested interface.</p><ul class="drawer-list"><li><strong>Spotlight / Prototype to product</strong>Structure, accessibility, testing, and useful feedback loops.</li><li><strong>Studio prompt</strong>Ship a small full-stack feature with clear technical trade-offs.</li></ul></template>
+  <template id="panel-faculty-data"><p class="kicker">Faculty reel / data systems</p><h2 id="drawerTitle">Amara<br>Nwosu.</h2><p>Reel concept: follow data from collection to decision, and examine the assumptions along the way.</p><ul class="drawer-list"><li><strong>Spotlight / Context matters</strong>Data quality, interpretation, privacy, and responsibility.</li><li><strong>Studio prompt</strong>Build a transparent analysis that makes uncertainty visible.</li></ul></template>
+  <template id="panel-menu"><p class="kicker">Navigate / NOVA333X</p><h2 id="drawerTitle">Your next<br>move.</h2><div class="menu-links"><button type="button" data-panel="curriculum">Detailed curriculum <span>↗</span></button><button type="button" data-panel="showcase">Student portfolio <span>↗</span></button><button type="button" data-panel="certification">Certificate verification <span>↗</span></button><button type="button" data-panel="tuition">Tuition calculator <span>↗</span></button><button type="button" data-panel="signin">Student portal sign-in <span>↗</span></button><button type="button" data-panel="signup">Academy sign-up <span>↗</span></button><button type="button" data-panel="enroll">Enrollment / scholarship <span>↗</span></button></div></template>
+  <script>
+    (() => {
+      "use strict";
+      const root = document.documentElement;
+      const drawer = document.getElementById("drawer");
+      const overlay = document.getElementById("overlay");
+      const drawerContent = document.getElementById("drawerContent");
+      const menuToggle = document.getElementById("menuToggle");
+      const drawerClose = document.getElementById("drawerClose");
+      const themeToggle = document.getElementById("themeToggle");
+      const academySearch = document.getElementById("academySearch");
+      const searchStatus = document.getElementById("searchStatus");
+      let activePanel = "";
+      let lastFocus = null;
+      window.setTimeout(() => document.getElementById("preloader").classList.add("done"), 520);
+
+      function sanitizeUserInput(value, limit) {
+        return value.replace(/[<>]/g, "").replace(/[\u0000-\u001f\u007f]/g, "").slice(0, limit).trim();
+      }
+      function closeDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+        drawer.setAttribute("aria-hidden", "true");
+        overlay.setAttribute("aria-hidden", "true");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
+        document.body.style.overflow = "";
+        activePanel = "";
+        if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+      }
+      function openDrawer(panel) {
+        const template = document.getElementById("panel-" + panel);
+        if (!template) return;
+        if (!drawer.classList.contains("open")) lastFocus = document.activeElement;
+        drawerContent.replaceChildren();
+        drawerContent.append(template.content.cloneNode(true));
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+        drawer.setAttribute("aria-hidden", "false");
+        overlay.setAttribute("aria-hidden", "false");
+        menuToggle.setAttribute("aria-expanded", String(panel === "menu"));
+        menuToggle.setAttribute("aria-label", panel === "menu" ? "Close menu" : "Open menu");
+        document.body.style.overflow = "hidden";
+        activePanel = panel;
+        drawerClose.focus();
+        bindTuitionCalculator();
+      }
+      document.addEventListener("click", event => {
+        const trigger = event.target.closest("[data-panel]");
+        if (!trigger) return;
+        event.preventDefault();
+        openDrawer(trigger.dataset.panel);
+      });
+      menuToggle.addEventListener("click", () => {
+        if (drawer.classList.contains("open") && activePanel === "menu") closeDrawer();
+        else openDrawer("menu");
+      });
+      drawerClose.addEventListener("click", closeDrawer);
+      overlay.addEventListener("click", closeDrawer);
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+        if (event.key !== "Tab" || !drawer.classList.contains("open")) return;
+        const focusable = drawer.querySelectorAll("button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])");
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      });
+      themeToggle.addEventListener("click", () => {
+        const next = root.dataset.theme === "dark" ? "light" : "dark";
+        root.dataset.theme = next;
+        themeToggle.setAttribute("aria-label", "Switch to " + (next === "dark" ? "light" : "dark") + " theme");
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", next === "dark" ? "#141516" : "#ecece7");
+      });
+      academySearch.addEventListener("input", () => {
+        const query = sanitizeUserInput(academySearch.value, 64).toLocaleLowerCase();
+        const modules = Array.from(document.querySelectorAll(".module"));
+        let visible = 0;
+        modules.forEach(module => {
+          const text = (module.dataset.searchable + " " + module.textContent).toLocaleLowerCase();
+          module.hidden = !!query && !text.includes(query);
+          if (!module.hidden) visible += 1;
+        });
+        searchStatus.textContent = query ? visible + (visible === 1 ? " course module" : " course modules") : "";
+      });
+      const skillCopy = {
+        core: ["Start at the core", "Practice Python, version control, and systems thinking. This is the shared foundation for every branch."],
+        web: ["Product engineering", "Build interfaces and APIs, test your assumptions, and learn to ship software people can use."],
+        ml: ["Applied intelligence", "Explore model behavior, evaluation, and responsible AI through small, inspectable experiments."],
+        data: ["Data & insight", "Work with structured data, investigate quality, and explain what the evidence can—and cannot—say."],
+        ship: ["Capstone / ship", "Combine your chosen skills in a documented project and present the decisions behind it."]
+      };
+      document.querySelector(".tree").addEventListener("click", event => {
+        const node = event.target.closest("[data-node]");
+        if (!node) return;
+        const selected = node.dataset.node;
+        const output = document.getElementById("skillOutput");
+        output.replaceChildren();
+        const heading = document.createElement("strong");
+        const detail = document.createElement("span");
+        heading.textContent = skillCopy[selected][0];
+        detail.textContent = skillCopy[selected][1];
+        output.append(heading, detail);
+        document.querySelectorAll(".skill-node").forEach(item => item.classList.toggle("active", item === node));
+        const edges = {
+          core: ["core-web"],
+          web: ["core-web", "web-ml", "web-data"],
+          ml: ["web-ml", "ml-ship"],
+          data: ["web-data", "data-ship"],
+          ship: ["ml-ship", "data-ship"]
+        };
+        document.querySelectorAll(".tree-lines path").forEach(path => path.classList.toggle("is-lit", edges[selected].includes(path.dataset.edge)));
+      });
+      drawerContent.addEventListener("submit", event => {
+        const form = event.target.closest("[data-demo-form]");
+        if (!form) return;
+        event.preventDefault();
+        const message = form.querySelector("[data-form-message]");
+        if (!message) return;
+        const missing = Array.from(form.querySelectorAll("[required]")).some(field => {
+          if (field.type === "checkbox") return !field.checked;
+          if (!field.checkValidity()) return true;
+          if (field.type === "password") return false;
+          const value = sanitizeUserInput(field.value, field.maxLength > 0 ? field.maxLength : 256);
+          return field.type === "email" ? !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) : !value;
+        });
+        if (missing) {
+          message.textContent = "Complete the required fields with valid information to preview this request.";
+          return;
+        }
+        const result = {
+          certification: "Verification request preview only. No official credential status was checked.",
+          enroll: "Application preview ready. Nothing was submitted or saved.",
+          signin: "Portal sign-in preview only. No authentication occurred and nothing was sent.",
+          signup: "Account setup preview only. No account was created and nothing was saved."
+        };
+        message.textContent = result[form.dataset.demoForm] || "Preview ready. Nothing was sent or saved.";
+      });
+      function bindTuitionCalculator() {
+        const form = drawerContent.querySelector("#tuitionForm");
+        if (!form) return;
+        const weeks = form.querySelector("#tuitionWeeks");
+        const scholarship = form.querySelector("#scholarshipPct");
+        const scholarshipValue = drawerContent.querySelector("#scholarshipValue");
+        const total = drawerContent.querySelector("#tuitionTotal");
+        const weekly = drawerContent.querySelector("#tuitionWeekly");
+        const update = () => {
+          const discount = Number(scholarship.value) / 100;
+          const amount = Math.round(4800 * Number(weeks.value) / 18 * (1 - discount));
+          scholarshipValue.textContent = scholarship.value;
+          total.textContent = "$" + amount.toLocaleString("en-US");
+          weekly.textContent = "$" + Math.round(amount / Number(weeks.value)).toLocaleString("en-US");
+        };
+        weeks.addEventListener("input", update);
+        scholarship.addEventListener("input", update);
+      }
+      const counters = document.querySelectorAll("[data-count]");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function runCounters() {
+        counters.forEach(counter => {
+          const target = Number(counter.dataset.count);
+          if (reducedMotion) { counter.textContent = String(target); return; }
+          const start = performance.now();
+          function step(now) {
+            const progress = Math.min(1, (now - start) / 950);
+            counter.textContent = String(Math.round(target * (1 - Math.pow(1 - progress, 3))));
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+        });
+      }
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries => {
+          if (entries.some(entry => entry.isIntersecting)) { runCounters(); observer.disconnect(); }
+        }, { threshold: .35 });
+        observer.observe(document.querySelector(".metrics"));
+      } else runCounters();
+    })();
+  </script>
+</body>
+</html>
